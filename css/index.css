@@ -123,6 +123,126 @@ input {
   text-decoration-color: currentColor;
 }
 
+/** JOB SECTION **/
+.job-list-section {
+  margin-top: 6rem;
+}
+
+.job-card {
+  background-color: var(--cyan-shade-800);
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px,
+    rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px,
+    rgba(0, 0, 0, 0.07) 0px 16px 16px;
+  border-radius: 0.6rem;
+  padding: 2rem;
+  margin-top: 2rem;
+  position: relative;
+}
+
+.job-card__logo {
+  width: 4rem;
+  height: 4rem;
+  object-fit: cover;
+  position: absolute;
+  top: -2rem;
+  left: 2rem;
+}
+
+.job-card__header {
+  padding: 1.5rem 0 2rem 0;
+  border-bottom: 0.1rem solid var(--cyan-shade-500);
+}
+
+.job-card__info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.job-card__name {
+  color: var(--cyan-shade-400);
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+/** PILL **/
+.pill {
+  color: var(--cyan-shade-800);
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 100rem;
+  text-transform: uppercase;
+}
+
+.pill--new {
+  background-color: var(--cyan-shade-400);
+}
+
+.pill--featured {
+  background-color: var(--cyan-shade-200);
+}
+
+.job-card__position {
+  color: var(--cyan-shade-200);
+  font-size: 1.4rem;
+  margin-top: 1.5rem;
+}
+
+.job-card__details {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.job-card__details p {
+  color: var(--cyan-shade-500);
+  font-size: 1.4rem;
+}
+
+.job-card__contract {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.job-card__contract::before,
+.job-card__contract::after {
+  content: "";
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  background-color: var(--cyan-shade-500);
+  border-radius: 50%;
+}
+
+/** TAGS ***/
+.job-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.tag {
+  cursor: pointer;
+  color: var(--cyan-shade-400);
+  font-size: 1.4rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 0.6rem;
+  background-color: hsl(189.47, 70.37%, 94.71%);
+  transition: all 0.3s ease;
+}
+
+.tag:hover {
+  background-color: var(--cyan-shade-400);
+  color: var(--cyan-shade-800);
+}
+
+/*** MEDIA QUERIES ***/
 @media (min-width: 425px) and (max-width: 768px) {
   .header {
     height: 30dvh;
