@@ -34,6 +34,16 @@ input {
   font: inherit;
 }
 
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.active {
+  visibility: visible;
+  opacity: 1;
+}
+
 /* HEADER */
 .header {
   height: 20dvb;

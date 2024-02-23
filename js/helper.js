@@ -1,6 +1,22 @@
-function generateHTML(type, allJobs) {
+function generateHTML(type, data) {
+  if (type === "button") {
+    return data
+      .map(
+        filterBtn =>
+          `
+          <button class="btn btn--filter">
+            <span class="btn__text">${filterBtn}</span>
+            <span class="btn__remove-icon"
+              ><img src="./images/icon-remove.svg" alt=""
+            /></span>
+          </button>
+        `
+      )
+      .join("");
+  }
+
   if (type === "card") {
-    return allJobs
+    return data
       .map(
         (job, i) => `
           <div
@@ -61,9 +77,9 @@ function generateHTML(type, allJobs) {
   }
 }
 
-function render(element, data, callback) {
+function render(element, data, type, callback) {
   element.innerHTML = "";
-  element.insertAdjacentHTML("afterbegin", callback("card", data));
+  element.insertAdjacentHTML("afterbegin", callback(type, data));
 }
 
 export { generateHTML, render };

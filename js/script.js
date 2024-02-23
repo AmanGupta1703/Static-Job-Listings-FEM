@@ -1,6 +1,10 @@
 import { generateHTML, render } from "./helper.js";
 
 const jobListContainerEl = document.querySelector(".job-list--container");
+const filterButtonWrapperEl = document.querySelector(
+  ".filter__buttons-wrapper"
+);
+const filterBoxContainerEl = document.querySelector(".filter--box-container");
 
 const getAllJobs = async () => {
   const response = await fetch("../data.json");
@@ -10,9 +14,7 @@ const getAllJobs = async () => {
 
 const allJobs = await getAllJobs();
 
-render(jobListContainerEl, allJobs, generateHTML);
-
-const jobCardTagsEl = Array.from(document.querySelectorAll(".job-card__tags"));
+render(jobListContainerEl, allJobs, "card", generateHTML);
 
 const filterTags = [];
 
@@ -26,7 +28,12 @@ function filterJobs(jobs, tags) {
 
     return tags.every(tag => jobTags.includes(tag));
   });
-  render(jobListContainerEl, filteredJobs, generateHTML);
+  render(jobListContainerEl, filteredJobs, "card", generateHTML);
+
+  filterBoxContainerEl.classList.add("active");
+  filterBoxContainerEl.classList.remove("hidden");
+
+  render(filterButtonWrapperEl, tags, "button", generateHTML);
 }
 
 function handleJobCardTagClick(e) {
