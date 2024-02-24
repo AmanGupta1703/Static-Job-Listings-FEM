@@ -4,7 +4,7 @@ function generateHTML(type, data) {
       .map(
         filterBtn =>
           `
-          <button class="btn btn--filter">
+          <button class="btn btn--filter" data-value="${filterBtn}">
             <span class="btn__text">${filterBtn}</span>
             <span class="btn__remove-icon"
               ><img src="./images/icon-remove.svg" alt=""

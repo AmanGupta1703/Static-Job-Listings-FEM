@@ -5,6 +5,7 @@ const filterButtonWrapperEl = document.querySelector(
   ".filter__buttons-wrapper"
 );
 const filterBoxContainerEl = document.querySelector(".filter--box-container");
+const btnClearEl = document.querySelector(".btn--clear");
 
 const filterTags = [];
 let allJobs;
@@ -55,7 +56,22 @@ function handleJobCardTagClick(e) {
   }
 
   renderFilteredJobs();
-  console.log(filterTags);
+}
+
+function handleFilterButtonRemoveClick(e) {
+  if (!e.target.closest(".btn--filter")) {
+    return;
+  }
+
+  const { value } = e.target.closest(".btn--filter").dataset;
+
+  filterTags.splice(filterTags.indexOf(value), 1);
+  renderFilteredJobs();
+}
+
+function handleClearFilterClick() {
+  filterTags.length = 0;
+  renderFilteredJobs();
 }
 
 function init() {
@@ -65,6 +81,11 @@ function init() {
   });
 
   window.addEventListener("click", handleJobCardTagClick);
+  filterButtonWrapperEl.addEventListener(
+    "click",
+    handleFilterButtonRemoveClick
+  );
+  btnClearEl.addEventListener("click", handleClearFilterClick);
 }
 
 init();
