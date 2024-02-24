@@ -6,20 +6,31 @@ const filterButtonWrapperEl = document.querySelector(
 );
 const filterBoxContainerEl = document.querySelector(".filter--box-container");
 
-const getAllJobs = async () => {
+const filterTags = [];
+let allJobs;
+
+async function getAllJobs() {
   const response = await fetch("../data.json");
   const data = await response.json();
   return data;
-};
+}
 
-const allJobs = await getAllJobs();
+function renderFilteredJobs() {
+  render(
+    jobListContainerEl,
+    filterJobs(allJobs, filterTags),
+    "card",
+    generateHTML
+  );
 
-render(jobListContainerEl, allJobs, "card", generateHTML);
+  filterBoxContainerEl.classList.add("active");
+  filterBoxContainerEl.classList.remove("hidden");
 
-const filterTags = [];
+  render(filterButtonWrapperEl, filterTags, "button", generateHTML);
+}
 
 function filterJobs(jobs, tags) {
-  const filteredJobs = jobs.filter(job => {
+  return jobs.filter(job => {
     const jobTags = [
       job.role.toLowerCase(),
       job.level.toLowerCase(),
@@ -28,12 +39,6 @@ function filterJobs(jobs, tags) {
 
     return tags.every(tag => jobTags.includes(tag));
   });
-  render(jobListContainerEl, filteredJobs, "card", generateHTML);
-
-  filterBoxContainerEl.classList.add("active");
-  filterBoxContainerEl.classList.remove("hidden");
-
-  render(filterButtonWrapperEl, tags, "button", generateHTML);
 }
 
 function handleJobCardTagClick(e) {
@@ -45,15 +50,21 @@ function handleJobCardTagClick(e) {
 
   if (filterTags.includes(value)) {
     filterTags.splice(filterTags.indexOf(value), 1);
-    filterJobs(allJobs, filterTags);
-    return;
+  } else {
+    filterTags.push(value);
   }
 
-  filterTags.push(value);
-
-  filterJobs(allJobs, filterTags);
-
+  renderFilteredJobs();
   console.log(filterTags);
 }
 
-window.addEventListener("click", handleJobCardTagClick);
+function init() {
+  getAllJobs().then(data => {
+    allJobs = data;
+    render(jobListContainerEl, allJobs, "card", generateHTML);
+  });
+
+  window.addEventListener("click", handleJobCardTagClick);
+}
+
+init();
